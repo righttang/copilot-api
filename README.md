@@ -11,7 +11,7 @@ This fork includes Anthropic-compatible endpoints that make it work seamlessly w
 
 1. Start the server:
    ```sh
-   bun run start
+   bun run dev start --port 4143 --business --verbose
    ```
 
 2. Configure Claude Code to use this proxy:
@@ -57,26 +57,6 @@ Run the container
 docker run -p 4141:4141 copilot-api
 ```
 
-## Using with npx
-
-You can run the project directly using npx:
-
-```sh
-npx copilot-api@latest start
-```
-
-With options:
-
-```sh
-npx copilot-api@latest start --port 8080
-```
-
-For authentication only:
-
-```sh
-npx copilot-api@latest auth
-```
-
 ## Command Structure
 
 Copilot API now uses a subcommand structure with two main commands:
@@ -109,38 +89,36 @@ The following command line options are available for the `start` command:
 
 ## Example Usage
 
-Using with npx:
-
 ```sh
 # Basic usage with start command
-npx copilot-api@latest start
+bun run dev start
 
 # Run on custom port with verbose logging
-npx copilot-api@latest start --port 8080 --verbose
+bun run dev start --port 4143 --verbose
 
 # Use with a business plan GitHub account
-npx copilot-api@latest start --business
+bun run dev start --business
 
 # Use with an enterprise plan GitHub account
-npx copilot-api@latest start --enterprise
+bun run dev start --enterprise
 
 # Enable manual approval for each request
-npx copilot-api@latest start --manual
+bun run dev start --manual
 
 # Set rate limit to 30 seconds between requests
-npx copilot-api@latest start --rate-limit 30
+bun run dev start --rate-limit 30
 
 # Wait instead of error when rate limit is hit
-npx copilot-api@latest start --rate-limit 30 --wait
+bun run dev start --rate-limit 30 --wait
 
 # Provide GitHub token directly
-npx copilot-api@latest start --github-token ghp_YOUR_TOKEN_HERE
+bun run dev start --github-token ghp_YOUR_TOKEN_HERE
 
 # Run only the auth flow
-npx copilot-api@latest auth
+bun run dev auth
 
 # Run auth flow with verbose logging
-npx copilot-api@latest auth --verbose
+bun run dev auth --verbose
 ```
 
 ## Running from Source
