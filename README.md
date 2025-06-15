@@ -3,7 +3,24 @@
 ⚠️ **EDUCATIONAL PURPOSE ONLY** ⚠️
 This project is a reverse-engineered implementation of the GitHub Copilot API created for educational purposes only. It is not officially supported by GitHub and should not be used in production environments.
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/E1E519XS7W)
+## Claude Code Integration
+
+This fork includes Anthropic-compatible endpoints that make it work seamlessly with [Claude Code](https://claude.ai/code), Anthropic's official CLI for Claude. The server provides `/v1/messages` endpoints that translate between Anthropic's API format and GitHub Copilot's OpenAI-compatible interface.
+
+### Using with Claude Code
+
+1. Start the server:
+   ```sh
+   bun run start
+   ```
+
+2. Configure Claude Code to use this proxy:
+   ```sh
+   export ANTHROPIC_API_KEY="dummy-key"
+   export ANTHROPIC_BASE_URL="http://localhost:4143"
+   ```
+
+3. Use Claude Code normally - it will route through GitHub Copilot while maintaining full compatibility with Anthropic's API format.
 
 ## Project Overview
 
