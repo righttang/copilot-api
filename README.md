@@ -14,10 +14,12 @@ This fork includes Anthropic-compatible endpoints that make it work seamlessly w
    bun run dev start --port 4143 --business --verbose
    ```
 
-2. Configure Claude Code to use this proxy:
+2. Configure Claude Code environment variables:
    ```sh
    export ANTHROPIC_API_KEY="dummy-key"
    export ANTHROPIC_BASE_URL="http://localhost:4143"
+   export ANTHROPIC_MODEL="claude-sonnet-4"
+   set -e CLAUDE_CODE_USE_BEDROCK
    ```
 
 3. Use Claude Code normally - it will route through GitHub Copilot while maintaining full compatibility with Anthropic's API format.
