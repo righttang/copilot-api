@@ -3,6 +3,34 @@
 ⚠️ **EDUCATIONAL PURPOSE ONLY** ⚠️
 This project is a reverse-engineered implementation of the GitHub Copilot API created for educational purposes only. It is not officially supported by GitHub and should not be used in production environments.
 
+## API Endpoints
+
+This project implements multiple API endpoints to provide compatibility with different AI tools and frameworks:
+
+### OpenAI-Compatible Endpoints
+
+These endpoints follow the OpenAI API specification and are compatible with tools that expect OpenAI's API format:
+
+- **`POST /chat/completions`** - Chat completion endpoint for conversational AI
+- **`POST /v1/chat/completions`** - Same as above with v1 prefix for tool compatibility
+- **`GET /models`** - List available models from GitHub Copilot
+- **`GET /v1/models`** - Same as above with v1 prefix
+- **`POST /embeddings`** - Generate text embeddings
+- **`POST /v1/embeddings`** - Same as above with v1 prefix
+
+### Anthropic-Compatible Endpoints
+
+These endpoints follow the Anthropic API specification and are compatible with tools that expect Claude's API format:
+
+- **`POST /v1/messages`** - Main Anthropic messages endpoint for chat completion
+- **`POST /v1/messages/count_tokens`** - Token counting endpoint for input estimation
+
+### Server Status
+
+- **`GET /`** - Server health check endpoint
+
+All endpoints proxy requests to GitHub Copilot's API while maintaining compatibility with the respective API formats. The server automatically handles authentication, request/response translation, and model selection.
+
 ## Claude Code Integration
 
 This fork includes Anthropic-compatible endpoints that make it work seamlessly with [Claude Code](https://claude.ai/code), Anthropic's official CLI for Claude. The server provides `/v1/messages` endpoints that translate between Anthropic's API format and GitHub Copilot's OpenAI-compatible interface.
