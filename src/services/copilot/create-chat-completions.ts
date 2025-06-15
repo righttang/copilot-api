@@ -160,7 +160,7 @@ export interface Message {
 // https://platform.openai.com/docs/api-reference
 
 export interface ContentPart {
-  type: "input_image" | "input_text" | "image_url"
+  type: "input_image" | "text" | "image_url"
   text?: string
   image_url?: string
 }
