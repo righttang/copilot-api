@@ -31,12 +31,6 @@
     "release": "bumpp && bun publish --access public",
     "start": "NODE_ENV=production bun run ./src/main.ts"
   },
-  "simple-git-hooks": {
-    "pre-commit": "bunx lint-staged"
-  },
-  "lint-staged": {
-    "*": "bunx eslint --fix"
-  },
   "dependencies": {
     "citty": "^0.1.6",
     "consola": "^3.4.2",

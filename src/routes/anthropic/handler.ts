@@ -40,7 +40,7 @@ export async function handleAnthropicMessages(c: Context) {
   try {
     const anthropicRequest = await c.req.json<AnthropicMessagesRequest>()
     
-    consola.info("Received Anthropic messages request", anthropicRequest)
+    consola.info("Received Anthropic messages request, requestModel:", anthropicRequest.model)
 
     if (anthropicRequest.messages) {
       const tokenCount = getTokenCount(
@@ -219,17 +219,40 @@ function selectCopilotModel(anthropicModel: string): string {
     return "claude-3-5-sonnet-20241022"
   }
   
-  // Try to find a Claude model first
+  // First try exact match (case-insensitive)
+  const exactMatch = state.models.data.find(model => 
+    model.id.toLowerCase() === modelName
+  )
+  
+  if (exactMatch) {
+    consola.debug(`Found exact model match: ${exactMatch.id}`)
+    return exactMatch.id
+  }
+  
+  // Then try to find claude-3.7-sonnet specifically
+  const preferredModel = state.models.data.find(model => 
+    model.id.toLowerCase() === "claude-3.7-sonnet"
+  )
+  
+  if (preferredModel) {
+    consola.debug(`Using preferred model: ${preferredModel.id}`)
+    return preferredModel.id
+  }
+  
+  // Then try to find any Claude model
   const claudeModel = state.models.data.find(model => 
     model.id.toLowerCase().includes("claude")
   )
   
   if (claudeModel) {
+    consola.debug(`Using claude model: ${claudeModel.id}`)
     return claudeModel.id
   }
   
   // Fallback to first available model
-  return state.models.data[0]?.id || "claude-3-5-sonnet-20241022"
+  const fallbackModel = state.models.data[0]?.id || "claude-3-5-sonnet-20241022"
+  consola.debug(`Using fallback model: ${fallbackModel}`)
+  return fallbackModel
 }
 
 function isAsyncIterable(obj: any): obj is AsyncIterable<any> {
